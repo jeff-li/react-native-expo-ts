@@ -9,7 +9,7 @@ Build universal native apps with TypeScript. A template included in [Airstrip](h
 
 ## Stack
 ✅ [React Navigation 6](https://reactnavigation.org/)  
-⬜️ [Jest](https://jestjs.io/docs/tutorial-react-native) with [React Native Testing Library](https://testing-library.com/docs/react-native-testing-library/intro/)
+⬜️ [Jest](https://jestjs.io/docs/tutorial-react-native) with [React Native Testing Library](https://testing-library.com/docs/react-native-testing-library/intro/) and additional Jest matcher [@testing-library/jest-native](https://github.com/testing-library/jest-native)
 
 ## Features
 ✅ Github Actions CI  
