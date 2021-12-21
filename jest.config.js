@@ -33,7 +33,8 @@ const config = {
     testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.expo/'],
     globals: {
       "ts-jest": {
-        isolatedModules: true
+        isolatedModules: true,
+        "babelConfig": true
       }
     },
   };
