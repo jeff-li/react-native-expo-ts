@@ -1,15 +1,15 @@
 import React from "react";
 import { render } from '@testing-library/react-native';
 
-import Home from "./Home";
+import Details from "./Details";
 
-describe("<Home />", () => {
+describe("<Details />", () => {
   it("should match screenshot", () => {
     const { toJSON, getAllByText } = render(
-      <Home />
+      <Details />
     );
     expect(toJSON()).toMatchSnapshot()
-    const bananaElements = getAllByText('Home Screen');
-  expect(bananaElements).toHaveLength(1);
+    const bananaElements = getAllByText('Details Screen');
+    expect(bananaElements).toHaveLength(1);
   });
 });

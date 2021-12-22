@@ -10,6 +10,6 @@ describe("<Home />", () => {
     );
     expect(toJSON()).toMatchSnapshot()
     const bananaElements = getAllByText('Home Screen');
-  expect(bananaElements).toHaveLength(1);
+    expect(bananaElements).toHaveLength(1);
   });
 });
