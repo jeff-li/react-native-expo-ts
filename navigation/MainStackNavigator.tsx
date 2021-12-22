@@ -24,29 +24,8 @@ import Settings from '../screens/Settings';
 import Actions from '../screens/Actions';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
-
-export type RootStackParamList = {
-  Root: NavigatorScreenParams<RootTabParamList> | undefined;
-  Modal: undefined;
-  NotFound: undefined;
-};
-
-export type RootTabParamList = {
-  Home: undefined;
-  Actions: undefined;
-  Settings: undefined;
-};
-
-export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
-  BottomTabScreenProps<RootTabParamList, Screen>,
-  NativeStackScreenProps<RootStackParamList>
->;
-
-export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
-  RootStackParamList,
-  Screen
->;
-
+import SignIn from '../screens/SignIn';
+import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 
 /**
  * A root stack navigator is often used for displaying modals on top of all other content.
@@ -60,12 +39,13 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
     >
       <Stack.Navigator>
-       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
-       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-       <Stack.Group screenOptions={{ presentation: 'modal' }}>
-         <Stack.Screen name="Modal" component={ModalScreen} />
-       </Stack.Group>
-     </Stack.Navigator>
+        <Stack.Screen name="SignIn" component={SignIn} options={{ headerShown: false }} />
+        <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+        <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+        <Stack.Group screenOptions={{ presentation: 'modal' }}>
+          <Stack.Screen name="Modal" component={ModalScreen} />
+        </Stack.Group>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
