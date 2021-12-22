@@ -22,7 +22,6 @@ import useColorScheme from '../hooks/useColorScheme';
 import Home from '../screens/Home';
 import Settings from '../screens/Settings';
 import Actions from '../screens/Actions';
-import Details from '../screens/Details';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 

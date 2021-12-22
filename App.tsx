@@ -9,13 +9,13 @@ import Navigation from './navigation/MainStackNavigator';
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
-  
+
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
       <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
+        <Navigation data-testid="nav" colorScheme={colorScheme} />
         <StatusBar />
       </SafeAreaProvider>
     );
