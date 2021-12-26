@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { StyleSheet, TextInput, Text, TouchableOpacity, View, useWindowDimensions } from "react-native";
+import { StyleSheet, useWindowDimensions } from "react-native";
+
 import { RootStackParamList } from '../types';
 import Background from '../components/Background';
 import Logo from '../components/Logo';
 import Input from '../components/Input';
 import Button from '../components/Button';
+import useAuth from '../hooks/useAuth';
 
 
 type SignInProps = NativeStackScreenProps<
@@ -16,6 +18,7 @@ type SignInProps = NativeStackScreenProps<
 const SignIn: React.FC<SignInProps> = ({
   navigation
 }) => {
+  const auth = useAuth();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const { height } = useWindowDimensions();
@@ -23,7 +26,8 @@ const SignIn: React.FC<SignInProps> = ({
   const handleLogin = () => {
     console.log(email)
     console.log(password)
-    navigation.navigate('Root')
+    auth.signIn()
+    // navigation.navigate('Root')
   }
 
   const handleReset = () => {
