@@ -25,6 +25,7 @@ import Actions from '../screens/Actions';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import SignIn from '../screens/SignIn';
+import ForgotPassword from '../screens/ForgotPassword';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 
 /**
@@ -40,6 +41,7 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
     >
       <Stack.Navigator>
         <Stack.Screen name="SignIn" component={SignIn} options={{ headerShown: false }} />
+        <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{ headerShown: false }} />
         <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
         <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
         <Stack.Group screenOptions={{ presentation: 'modal' }}>

@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { KeyboardAvoidingView, StyleSheet, TextInput, Text, TouchableOpacity, View } from "react-native";
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { StyleSheet, TextInput, Text, TouchableOpacity, View, useWindowDimensions } from "react-native";
 import { RootStackParamList } from '../types';
+import Background from '../components/Background';
+import Logo from '../components/Logo';
+import Input from '../components/Input';
+import Button from '../components/Button';
 
-type SignInScreenNavigationProp = NativeStackNavigationProp<
+
+type SignInProps = NativeStackScreenProps<
   RootStackParamList,
   'SignIn'
 >;
 
-const SignIn: React.FC = () => {
-  const navigation = useNavigation<SignInScreenNavigationProp>();
+const SignIn: React.FC<SignInProps> = ({
+  navigation
+}) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const { height } = useWindowDimensions();
 
   const handleLogin = () => {
     console.log(email)
@@ -20,46 +26,41 @@ const SignIn: React.FC = () => {
     navigation.navigate('Root')
   }
 
+  const handleReset = () => {
+    console.log(email)
+    navigation.navigate('ForgotPassword', { currentEmail: email })
+  }
+
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior="padding"
-    >
-      <View style={styles.inputContainer}>
-        <TextInput
-          value={email}
-          onChangeText={setEmail}
-          placeholder="email"
-          style={styles.input}
-        />
-        <TextInput
-          value={password}
-          onChangeText={setPassword}
-          placeholder="password"
-          style={styles.input}
-          secureTextEntry 
-        />
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          onPress={handleLogin}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-      </View>
-    </KeyboardAvoidingView>
+    <Background>
+      <Logo />
+      <Input
+        value={email}
+        setValue={setEmail}
+        placeholder="email"
+      />
+      <Input
+        value={password}
+        setValue={setPassword}
+        placeholder="password"
+        secureTextEntry
+      />
+      <Button
+        text='Login'
+        onPress={handleLogin}
+      />
+      <Button
+        text='Forgot Password?'
+        onPress={handleReset}
+        type="link"
+      />
+    </Background>
   )
 }
 
 export default SignIn;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
   inputContainer: {
     width: '80%'
   },
@@ -80,7 +81,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     width: '100%',
     padding: 15,
-    borderRadius: 10
   },
   buttonText: {
     color: 'white'
