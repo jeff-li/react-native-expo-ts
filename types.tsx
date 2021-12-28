@@ -27,9 +27,9 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 >;
 
 export type RootTabParamList = {
-  Home: undefined;
+  HomeStack: undefined;
   Actions: undefined;
-  Settings: undefined;
+  SettingsStack: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
