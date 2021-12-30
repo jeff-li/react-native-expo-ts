@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StyleSheet, Text } from "react-native";
-import Background from '../components/Background';
+import { LoginBackground } from '../components/Background';
 import Button from '../components/Button';
 import BackButton from '../components/BackButton';
 import Input from '../components/Input';
 import { MonoText } from '../components/StyledText';
-import { RootStackParamList } from '../types';
+import { AuthStackParamList } from '../types';
 
 type ForgotPasswordNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
+  AuthStackParamList,
   'ForgotPassword'
 >;
 type ForgotPasswordRouteProp = RouteProp<
-  RootStackParamList,
+  AuthStackParamList,
   'ForgotPassword'
 >;
 
@@ -28,7 +28,7 @@ const ForgotPassword: React.FC<ForgotPasswordNavigationProp> = () => {
     setBtnTxt('Sent')
   }
   return (
-    <Background>
+    <LoginBackground>
       <BackButton goBack={navigation.goBack} />
       <Text 
         style={{ color: 'gray', margin: 10, fontSize: 27}}
@@ -38,7 +38,7 @@ const ForgotPassword: React.FC<ForgotPasswordNavigationProp> = () => {
       <Input value={email} setValue={setEmail} placeholder='Email'/>
       <MonoText>You will receive an email with the password reset link.</MonoText>
       <Button text={btnTxt} onPress={resetPassword}/>
-    </Background>
+    </LoginBackground>
   )
 }
 

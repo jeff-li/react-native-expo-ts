@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StyleSheet, useWindowDimensions } from "react-native";
 
-import { RootStackParamList } from '../types';
-import Background from '../components/Background';
+import { LoginBackground } from '../components/Background';
 import Logo from '../components/Logo';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import useAuth from '../hooks/useAuth';
+import { AuthStackParamList } from '../types';
 
 
 type SignInProps = NativeStackScreenProps<
-  RootStackParamList,
+  AuthStackParamList,
   'SignIn'
 >;
 
@@ -36,7 +36,7 @@ const SignIn: React.FC<SignInProps> = ({
   }
 
   return (
-    <Background>
+    <LoginBackground>
       <Logo />
       <Input
         value={email}
@@ -58,7 +58,7 @@ const SignIn: React.FC<SignInProps> = ({
         onPress={handleReset}
         type="link"
       />
-    </Background>
+    </LoginBackground>
   )
 }
 

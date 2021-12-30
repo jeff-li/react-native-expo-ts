@@ -3,36 +3,38 @@
  * https://reactnavigation.org/docs/typescript/
  */
 
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
+import { NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 declare global {
   namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
+    interface RootParamList extends AuthStackParamList {}
   }
 }
 
-export type RootStackParamList = {
-  Root: NavigatorScreenParams<RootTabParamList> | undefined;
+export type AuthStackParamList = {
   Modal: undefined;
-  NotFound: undefined;
   SignIn: undefined;
   ForgotPassword: { currentEmail: string };
 };
 
-export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
-  RootStackParamList,
+export type AuthStackScreenProps<Screen extends keyof AuthStackParamList> = NativeStackScreenProps<
+  AuthStackParamList,
   Screen
 >;
 
-export type RootTabParamList = {
-  HomeStack: undefined;
-  Actions: undefined;
-  SettingsStack: undefined;
-};
+export type HomeStackParamList = {
+  Home: undefined;
+  Details: { data: any };
+}
 
-export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
-  BottomTabScreenProps<RootTabParamList, Screen>,
-  NativeStackScreenProps<RootStackParamList>
->;
+export type SettingsStackParamList = {
+  Settings: undefined;
+  About: undefined;
+}
+
+export type AppTabParamList = {
+  HomeStack: NavigatorScreenParams<HomeStackParamList> | undefined;
+  Actions: undefined;
+  SettingsStack: NavigatorScreenParams<SettingsStackParamList> | undefined;
+};

@@ -5,7 +5,7 @@ export type BackgroundProps = {
     children: React.ReactNode
 };
 
-const Background: React.FC<BackgroundProps> = ({ children }) => {
+export const LoginBackground: React.FC<BackgroundProps> = ({ children }) => {
   // add <ScrollView showsVerticalScrollIndicator={false}> if content doenst fit on screen
   return (
     <ImageBackground
@@ -19,8 +19,6 @@ const Background: React.FC<BackgroundProps> = ({ children }) => {
     </ImageBackground>
   )
 }
-
-export default Background
 
 const styles = StyleSheet.create({
   background: {

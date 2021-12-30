@@ -2,17 +2,25 @@ import React from "react"
 import {
   Box,
   FlatList,
-  Icon,
   HStack,
   Text,
   Spacer,
 } from "native-base"
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StyleSheet, Alert, TouchableOpacity} from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 
 import useAuth from '../hooks/useAuth';
+import { SettingsStackParamList } from '../types';
 
-const Settings = ({ navigation }) => {
+type SettingsNavigationProp = NativeStackNavigationProp<
+  SettingsStackParamList,
+  'Settings'
+>;
+
+const Settings = () => {
+  const navigation = useNavigation<SettingsNavigationProp>();
   const auth = useAuth();
   const data = [{
     id: 'help',
@@ -25,7 +33,7 @@ const Settings = ({ navigation }) => {
     icon: 'info',
     label: 'About',
     color: 'black',
-    action: () => navigation.navigate('SettingsDetails')
+    action: () => navigation.navigate('About')
   }, {
     id: "logout",
     icon: 'sign-out-alt',
