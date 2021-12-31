@@ -1,11 +1,16 @@
 import React from 'react'
-import { ImageBackground, StyleSheet, KeyboardAvoidingView } from 'react-native'
+import { View, ImageBackground, StyleSheet, KeyboardAvoidingView } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-export type BackgroundProps = {
-    children: React.ReactNode
+export type LoginBackgroundProps = {
+  children: React.ReactNode
 };
 
-export const LoginBackground: React.FC<BackgroundProps> = ({ children }) => {
+export type SafeViewBackgroundProps = {
+  children: React.ReactNode
+} & View['props'];
+
+export const LoginBackground: React.FC<LoginBackgroundProps> = ({ children }) => {
   // add <ScrollView showsVerticalScrollIndicator={false}> if content doenst fit on screen
   return (
     <ImageBackground
@@ -20,11 +25,26 @@ export const LoginBackground: React.FC<BackgroundProps> = ({ children }) => {
   )
 }
 
+export const SafeViewBackground: React.FC<SafeViewBackgroundProps> = ({style, children }) => {
+  return (
+    <SafeAreaView style={[styles.safeview, style]}>
+      <KeyboardAvoidingView behavior="padding">
+        {children}
+      </KeyboardAvoidingView>
+    </SafeAreaView>
+  )
+}
+
 const styles = StyleSheet.create({
   background: {
     flex: 1,
     width: '100%',
     backgroundColor: 'whitesmoke',
+  },
+  safeview: {
+    flex: 1,
+    padding: 15,
+    backgroundColor: '#ebebeb'
   },
   container: {
     flex: 1,
@@ -34,5 +54,5 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  }
 })

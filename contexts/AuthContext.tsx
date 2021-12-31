@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store';
 
 export type AuthContextData = {
   authData?: AuthData;
@@ -23,14 +23,14 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
   useEffect(() => {
     //Every time the App is opened, this provider is rendered
     //and call de loadStorageData function.
-    loadStorageData();
+    loadSecureStorageData();
   }, []);
 
-  async function loadStorageData(): Promise<void> {
+  async function loadSecureStorageData(): Promise<void> {
     try {
       setLoading(true);
-      //Try get the data from Async Storage
-      const authDataSerialized = await AsyncStorage.getItem('@AuthData');
+      //Try get the data from Secure Store
+      const authDataSerialized = await SecureStore.getItemAsync('authData');
       if (authDataSerialized) {
         //If there are data, it's converted to an Object and the state is updated.
         const _authData: AuthData = JSON.parse(authDataSerialized);
@@ -57,13 +57,12 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
         email: 'test@test.com',
         name: 'test user',
       }
-      setAuthData(_authData);
-      // Persist the data in the Async Storage
-      // to be recovered in the next user session.
+      // Persist the data to be recovered in the next user session.
       // WARNING: Async Storage is not secure enough to secure sensitive information
       // alternative options: react-native-keychain or expo-secure-store
       // https://stackoverflow.com/questions/39148714/is-react-natives-async-storage-secure
-      AsyncStorage.setItem('@AuthData', JSON.stringify(_authData));
+      await SecureStore.setItemAsync('authData', JSON.stringify(_authData))
+      setAuthData(_authData);
       setLoading(false)
     } catch(e) {
       setLoading(false)
@@ -79,7 +78,7 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
       await new Promise(resolve => setTimeout(resolve, 1000));
       //Remove the data from Async Storage
       //to NOT be recovered in next session.
-      await AsyncStorage.removeItem('@AuthData');
+      await SecureStore.deleteItemAsync('authData');
       setLoading(false)
     } catch(e) {
       setLoading(false)
